@@ -9,13 +9,11 @@ public interface Service {
 
     List<TaskDTO> getTasks();
 
-    TaskDTO getTask(String id);
+    TaskDTO getTask(int id);
 
     void addTask(TaskDTO task);
 
-    void editTask(String id, TaskDTO task);
+    void editTask(int id, TaskDTO task);
 
-    String getLastId();
-
-    void addSubTask(SubTaskDTO subTask);
+    //void addSubTask(SubTaskDTO subTask);
 }

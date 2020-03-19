@@ -3,6 +3,7 @@ package com.example.planner.model;
 import com.example.planner.dto.SubTaskDTO;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.annotation.Generated;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -16,8 +17,9 @@ import java.util.List;
 public class Task implements Serializable {
     private String description, title;
 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Id
-    private String id;
+    private int id;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate deadlineDate;
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
@@ -34,11 +36,11 @@ public class Task implements Serializable {
         this.deadlineDate = deadlineDate;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -50,7 +52,7 @@ public class Task implements Serializable {
         this.title = title;
     }
 
-    public Task(String description, LocalDate deadlineDate, LocalTime deadlineTime, String id, String title) {
+    public Task(String description, LocalDate deadlineDate, LocalTime deadlineTime, int id, String title) {
         setDescription(description);
         setDeadlineDate(deadlineDate);
         setDeadlineTime(deadlineTime);

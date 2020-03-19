@@ -1,9 +1,6 @@
 package com.example.planner.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -11,9 +8,10 @@ public class SubTask implements Serializable {
 
     @ManyToOne
     private Task superTask;
-    @Id
     private String title;
-    private String idSuper;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
     private String description;
 
     public SubTask() {
@@ -25,17 +23,16 @@ public class SubTask implements Serializable {
         setSuperTask(superTask);
     }
 
-    public String getId() {
-        return idSuper;
+    public int getId() {
+        return id;
     }
 
-    public void setId(String idSuper) {
-        this.idSuper = idSuper;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public SubTask(String title, String idSuper, String description) {
+    public SubTask(String title, String description) {
         setDescription(description);
-        setId(idSuper);
         setTitle(title);
     }
 

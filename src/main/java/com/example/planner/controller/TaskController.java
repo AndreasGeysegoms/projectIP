@@ -25,7 +25,7 @@ public class TaskController {
 
     @RequestMapping("/tasks/{id}")
     @GetMapping
-    public String showTask(@PathVariable("id") String id, Model model) {
+    public String showTask(@PathVariable("id") int id, Model model) {
         model.addAttribute("task",service.getTask(id));
         return "task.html";
     }
@@ -42,13 +42,12 @@ public class TaskController {
         if (bindingResult.hasErrors()) {
             return "form";
         }
-        task.setId(service.getLastId());
         service.addTask(task);
         return "redirect:/tasks";
     }
 
     @RequestMapping("/tasks/edit/{id}")
-    public String editTask(@PathVariable("id") String id, Model model) {
+    public String editTask(@PathVariable("id") int id, Model model) {
         model.addAttribute("task",service.getTask(id));
         return "editTask.html";
     }
@@ -63,10 +62,10 @@ public class TaskController {
     @RequestMapping("/tasks/subtask/submit")
     @PostMapping
     public String createSubTaskSubmit(@ModelAttribute SubTaskDTO subTask, Model model) {
-        String id = subTask.getId();
+        int idSuperTask = subTask.getId();
         service.addSubTask(subTask);
-        model.addAttribute("task",service.getTask(id));
-        return "redirect:/tasks/"+id;
+        model.addAttribute("task",service.getTask(idSuperTask));
+        return "redirect:/tasks/"+idSuperTask;
     }
 
     @RequestMapping("/tasks/{id}/sub/create")

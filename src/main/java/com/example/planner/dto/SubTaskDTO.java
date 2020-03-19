@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class SubTaskDTO {
     private TaskDTO superTask;
     private String title;
-    private String id;
+    private int id;
     private String description;
 
     public SubTaskDTO() {
@@ -20,17 +20,16 @@ public class SubTaskDTO {
         setSuperTask(superTask);
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public SubTaskDTO(String title, String id, String description) {
+    public SubTaskDTO(String title, String description) {
         setDescription(description);
-        setId(id);
         setTitle(title);
     }
 

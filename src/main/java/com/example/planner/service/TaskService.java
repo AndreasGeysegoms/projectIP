@@ -49,7 +49,7 @@ public class TaskService implements com.example.planner.service.Service {
         }).collect(Collectors.toList());
     }
 
-    public TaskDTO getTask(String id) {
+    public TaskDTO getTask(int id) {
         Task t = this.taskDB.findById(id).get();
         TaskDTO task = new TaskDTO();
         task.setId(t.getId());
@@ -81,7 +81,7 @@ public class TaskService implements com.example.planner.service.Service {
         taskDB.save(task);
     }
 
-    public void editTask(String id, TaskDTO task) {
+    public void editTask(int id, TaskDTO task) {
         Task t = this.taskDB.findById(id).get();
         t.setDeadlineDate(task.getDeadlineDate());
         t.setDeadlineTime(task.getDeadlineTime());
@@ -90,30 +90,8 @@ public class TaskService implements com.example.planner.service.Service {
         taskDB.saveAndFlush(t);
     }
 
-    public String getLastId() {
-        List<TaskDTO> tasks = this.taskDB.findAll().stream().map( t -> {
-            TaskDTO task = new TaskDTO();
-            task.setId(t.getId());
-            task.setDeadlineDate(t.getDeadlineDate());
-            task.setDeadlineTime(t.getDeadlineTime());
-            task.setDescription(t.getDescription());
-            task.setTitle(t.getTitle());
-            return task;
-        }).collect(Collectors.toList());
-
-        String id = "0";
-
-        for (TaskDTO t: tasks) {
-            if (Integer.parseInt(id) < Integer.parseInt(t.getId())) {
-                id = t.getId();
-            }
-        }
-
-        return String.valueOf(Integer.parseInt(id)+1);
-    }
-
     public void addSubTask(SubTaskDTO subdto) {
-        String id = subdto.getId();
+        int id = subdto.getId();
         SubTask sub = new SubTask();
         sub.setTitle(subdto.getTitle());
         sub.setDescription(subdto.getDescription());
@@ -140,17 +118,7 @@ public class TaskService implements com.example.planner.service.Service {
         sub.setSuperTask(t);
         task.setSubTasks(dtosubs);
 
-        //this.taskDB.save(t);
-        //this.subTaskDB.save(sub);
-    }
-
-    private String getSubTaskId(String id) {
-        String idRes = "0";
-
-        Task t = this.taskDB.findById(id).get();
-        for (SubTask s : t.getSubTasks()) {
-            if (Integer.parseInt(idRes) < Integer.parseInt(t.getId())) idRes = t.getId();
-        }
-        return "s"+String.valueOf(Integer.parseInt(idRes)+1);
+        this.taskDB.saveAndFlush(t);
+        this.subTaskDB.save(sub);
     }
 }

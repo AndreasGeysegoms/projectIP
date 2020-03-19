@@ -13,7 +13,7 @@ import java.util.List;
 public class TaskDTO {
 
     private String description, title;
-    private String id;
+    private int id;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate deadlineDate;
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
@@ -30,11 +30,11 @@ public class TaskDTO {
         this.deadlineDate = deadlineDate;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -46,7 +46,7 @@ public class TaskDTO {
         this.title = title;
     }
 
-    public TaskDTO(String description, LocalDate deadlineDate, LocalTime deadlineTime, String id, String title) {
+    public TaskDTO(String description, LocalDate deadlineDate, LocalTime deadlineTime, int id, String title) {
         setDescription(description);
         setDeadlineDate(deadlineDate);
         setDeadlineTime(deadlineTime);
