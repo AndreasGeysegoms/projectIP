@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Task</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
 <h1>Task Detail</h1>
@@ -16,12 +17,10 @@
         <td><a th:href="@{/tasks/{id}/sub/create(id=${task.id})}">Create subtask</a></td>
     </tr>
 </table>
-<div th:if="${task.subTasks != null && !task.subTasks.empty}" th:each="subTask : ${task.subTasks}">
-    <article>
+<div class="grid-container">
+    <article class="grid-tile" th:if="${task.subTasks != null && !task.subTasks.empty}" th:each="subTask : ${task.subTasks}">
         <h2 th:text="${subTask.title}"></h2>
         <p th:text="${subTask.description}"></p>
-        <!--<a th:href="@{tasks/edit/{id} (id=${subTask.id})}">Edit</a>-->
-        <!--<a th:href="@{/tasks/{id}/sub/create(id=${subTask.id})}">Create subtask</a>-->
     </article>
 </div>
 </body>

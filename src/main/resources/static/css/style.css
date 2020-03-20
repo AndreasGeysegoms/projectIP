@@ -1,0 +1,20 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid-tile:nth-child(4n+0) {
+    background: yellow;
+}
+
+.grid-tile:nth-child(4n+1) {
+    background: dodgerblue;
+}
+
+.grid-tile:nth-child(4n+2) {
+    background: greenyellow;
+}
+
+.grid-tile:nth-child(4n+3) {
+    background: hotpink;
+}
