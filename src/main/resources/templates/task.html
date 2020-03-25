@@ -1,12 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Task</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-</head>
-<body>
-<h1>Task Detail</h1>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="currentPage = 'Task Detail'">
+<body style="height: 100%; width: 100%">
+<div th:include="header.html"></div>
 <p th:unless="${task}">Task not found</p>
 <table th:if="${task}">
     <tr>
@@ -23,5 +18,6 @@
         <p th:text="${subTask.description}"></p>
     </article>
 </div>
+<div th:include="footer.html"></div>
 </body>
 </html>

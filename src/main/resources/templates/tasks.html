@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8">
-    <title>Tasks</title>
-</head>
-<body>
-<h1>Task overview</h1>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" th:with="currentPage='Task Overview'">
+
+<body style="height: 100%; width: 100%">
+<div th:include="header.html"></div>
 <p th:if="${tasks == null || tasks.empty}">No tasks left to do</p>
 <table th:if="${tasks != null && !tasks.empty}">
     <thead>
@@ -22,5 +19,6 @@
     </tr>
     </tbody>
 </table>
+<div th:include="footer.html"></div>
 </body>
 </html>

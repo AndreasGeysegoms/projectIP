@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${currentPage} + ' - Task Manager'"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Description"
+          CONTENT="task management">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="/tasks">Overview of your tasks</a></li>
+        <li><a href="/tasks/new">Create a new task</a></li>
+    </ul>
+</nav>
+<h1 th:text="${currentPage}">
+
+</h1>
+</body>
+</html>

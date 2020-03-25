@@ -1,11 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit a task</title>
-</head>
-<body>
-<h1>Edit a task</h1>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="currentPage='Edit Task'">
+<body style="height: 100%; width: 100%">
+<div th:include="header.html"></div>
 <form method="post" action="/tasks/edit/submitChange">
     <p>
         <label for="title">Title:</label>
@@ -30,5 +26,6 @@
         <input type="submit" value="Submit my changes!">
     </p>
 </form>
+<div th:include="footer.html"></div>
 </body>
 </html>
