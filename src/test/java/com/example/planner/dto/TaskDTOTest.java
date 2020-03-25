@@ -29,7 +29,7 @@ public class TaskDTOTest {
         taskDTO.setDeadlineTime(LocalTime.of(8,0));
         taskDTO.setDeadlineDate(LocalDate.of(2020,10,24));
 
-        assertEquals("Eerste taak: due 24 oktober 2020 at 08:00",taskDTO.getFormatted());
+        assertEquals("Eerste taak: due 24 October 2020 at 08:00",taskDTO.getFormatted());
     }
 
     @Test
