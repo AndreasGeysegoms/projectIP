@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${currentPage} + ' - Task Manager'"></title>
+    <title th:text="${currentPage} + ' - ' +#{taskmgr}"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Description"
           CONTENT="task management">
@@ -15,8 +15,8 @@
 <body>
 <nav>
     <ul>
-        <li><a href="/tasks">Overview of your tasks</a></li>
-        <li><a href="/tasks/new">Create a new task</a></li>
+        <li><a href="/tasks" th:text="#{overview}"></a></li>
+        <li><a href="/tasks/new" th:text="#{newTask}"></a></li>
     </ul>
 </nav>
 <h1 th:text="${currentPage}">

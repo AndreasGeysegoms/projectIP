@@ -2,6 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org" th:with="currentPage='Home'">
 <body style="height: 100%; width: 100%">
 <div th:include="header.html"></div>
+<span th:text="#{lang.change}"></span>:
+<select id="locales">
+    <option value=""></option>
+    <option value="en" th:text="#{lang.en}"></option>
+    <option value="nl" th:text="#{lang.nl}"></option>
+</select>
 <div th:include="footer.html"></div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#locales").change(function () {
+            var selectedOption = $('#locales').val();
+            if (selectedOption != ''){
+                window.location.replace('/?lang=' + selectedOption);
+            }
+        });
+    });
+</script>
 </html>
