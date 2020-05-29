@@ -2,11 +2,43 @@
     <ul>
         <li><a href="/tasks" th:text="#{overview}"></a></li>
         <li><a href="/tasks/new" th:text="#{newTask}"></a></li>
-        <li th:if="${#httpServletRequest.remoteUser != null}">
-            <form th:action="@{/logout}" method="post">
-                <p>
-                    <label for="">Welcome [[${#httpServletRequest.remoteUser}]]!</label>
-                    <input type="submit" value="Sign Out"/>
+        <li style="    padding: 50.5px;
+    background: slategrey;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    font-size: larger;">
+            <span th:text="#{lang.change}"></span>:
+            <select id="locales">
+                <option value=""></option>
+                <option value="en" th:text="#{lang.en}"></option>
+                <option value="nl" th:text="#{lang.nl}"></option>
+            </select>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+            </script>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#locales").change(function () {
+                        var selectedOption = $('#locales').val();
+                        if (selectedOption != ''){
+                            window.location.replace(window.location.pathname + '?lang=' + selectedOption);
+                        }
+                    });
+                });
+            </script>
+        </li>
+        <li th:if="${#httpServletRequest.remoteUser != null}" >
+            <form th:action="@{/logout}" method="post" style="margin: 0;">
+                <p style="
+                margin: 0;
+                padding: 50.5px;
+    background: slategrey;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    font-size: larger;">
+                    <label for="" th:text="#{welcome} + ' ' + ${#httpServletRequest.remoteUser} + '!'">Welcome [[${#httpServletRequest.remoteUser}]]!</label>
+                    <input type="submit" th:value="#{signout}"/>
                 </p>
             </form>
         </li>

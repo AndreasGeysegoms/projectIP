@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="currentPage='Sign in'">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="currentPage=#{login}">
 <div th:include="header.html"></div>
 <body>
 <div th:include="nav.html"></div>
-<p th:if="${param.logout}">You have succesfully logged out.</p>
-<p th:if="${param.error}">Invalid credentials</p>
+<p th:if="${param.logout}" th:text="#{logout}"></p>
+<p th:if="${param.error}" th:text="#{badCred}"></p>
 <form th:method="post" th:action="@{/login}">
     <div>
-        <label for="username">Username:</label>
+        <label for="username" th:text="#{userName} + ':'"></label>
         <input type="text" id="username" name="username">
     </div>
     <div>
-        <label for="password">Password:</label>
+        <label for="password" th:text="#{userPass} + ':'"></label>
         <input type="password" id="password" name="password">
     </div>
-    <input type="submit" value="Sign in">
+    <input type="submit" th:value="#{login}">
 </form>
-<p>Or register <a th:href="@{/registerPage}">here</a></p>
+<div style="display: inline-block">
+    <p th:text="#{orReg} + ' '" style="display: inline-block; "></p><a th:href="@{/registerPage}" th:text="#{here}" style="display: inline-block;"></a>
+</div>
+
 </body>
 <div th:include="footer.html"></div>
 </html>

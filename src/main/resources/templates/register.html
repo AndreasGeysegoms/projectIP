@@ -1,22 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="currentPage='Register'">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="currentPage=#{register}">
 <div th:include="header.html"></div>
 <body>
 <div th:include="nav.html"></div>
 <form th:method="post" th:action="@{/signup}" th:object="${user}">
-    <p th:if="${!#fields.globalErrors().isEmpty()}" th:text="${#fields.globalErrors()}"></p>
+    <!--gebruik th:object als object en wijs th:field toe als attributes-->
     <div>
-        <label for="username">Username:</label>
+        <label for="username" th:text="#{userName} + ':'"></label>
+        <!--th:field geeft aan welke parameter aan dit inputveld gelinkt is;
+         zorgt voor bij een fout geeft deze de juiste velden opnieuw ingevuld terug;
+         id en name attribute worden automatisch ingevuld-->
         <input type="text" th:field="*{username}">
         <p th:errors="*{username}"></p>
     </div>
     <div>
-        <label for="password">Password:</label>
+        <label for="password" th:text="#{userPass} + ':'"></label>
         <input type="password" th:field="*{password}">
     </div>
-    <input type="submit" value="Sign Up">
+    <input type="submit" th:value="#{register}">
 </form>
-<p>Already have an account? Login <a href="/loginPage">here</a></p>
+<div style="display: inline-block">
+    <p th:text="#{gotAccount} + ' '" style="display: inline-block; "></p><a th:href="@{/loginPage}" th:text="#{here}" style="display: inline-block; "></a>
+</div>
+
 </body>
 <div th:include="footer.html"></div>
 </html>

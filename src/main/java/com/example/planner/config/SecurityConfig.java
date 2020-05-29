@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/css/reset.css").permitAll()
                 .mvcMatchers("/css/style.css").permitAll()
                 .mvcMatchers("/img/notebook raw.jpg").permitAll()
+                .mvcMatchers("/login?lang=en","/login?lang=nl").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

@@ -28,6 +28,7 @@ public class TaskController {
     @RequestMapping("/tasks")
     @GetMapping
     public String showTasks(Model model) {
+        // taken meegeven aan de model
         model.addAttribute("tasks", service.getTasks());
         return "tasks.html";
     }
@@ -35,6 +36,7 @@ public class TaskController {
     @RequestMapping("/tasks/{id}")
     @GetMapping
     public String showTask(@PathVariable("id") int id, Model model) {
+        // model oproepen om wat aan toe te voegen
         model.addAttribute("task", service.getTask(id));
         return "task.html";
     }
@@ -48,6 +50,7 @@ public class TaskController {
     @RequestMapping("/tasks/new/submit")
     @PostMapping
     public String addTaskSubmit(@ModelAttribute TaskDTO task, Model model, BindingResult bindingResult) {
+        // bindingResult checkt of er iets fout is
         if (bindingResult.hasErrors()) {
             return "form";
         }
@@ -57,6 +60,7 @@ public class TaskController {
 
     @RequestMapping("/tasks/edit/{id}")
     public String editTask(@PathVariable("id") int id, Model model) {
+        // taak meegeven aan de model
         model.addAttribute("task", service.getTask(id));
         return "editTask.html";
     }
@@ -97,6 +101,7 @@ public class TaskController {
 
     @RequestMapping("/registerPage")
     public String getRegisterPage(Model model){
+        // deze lege user klaarzetten om door te geven aan de form
         model.addAttribute("user",new CreateUserDTO());
         return "register.html";
     }
@@ -104,15 +109,10 @@ public class TaskController {
     @PostMapping
     @RequestMapping("/signup")
     public String postCreateUser(@ModelAttribute("user") @Valid CreateUserDTO user, BindingResult bindingResult) {
-            if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "redirect:/registerPage";
         }
         userService.createUser(user);
-        System.out.println("Created user");
-        System.out.println(user.toString());
-        System.out.println(userService.loadUserByUsername(user.getUsername()).toString());
         return "redirect:/login";
     }
-
-
 }
