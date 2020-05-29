@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/" th:with="currentPage=#{overview}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" th:with="currentPage=#{overview}" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:include="header.html"></div>
 <body style="height: 100%; width: 100%">
 <div th:include="nav.html"></div>
@@ -13,9 +13,9 @@
     <tbody>
     <tr th:each="task: ${tasks}">
         <td th:text="${task.formatted}"></td>
-        <td><a th:href="@{tasks/edit/{id} (id=${task.id})}" th:text="#{edit}"></a></td>
-        <td><a th:href="@{/tasks/{id}/sub/create(id=${task.id})}" th:text="#{createSub}"></a></td>
-        <td><a th:href="@{/tasks/{id}" th:text="#{details}"></a></td>
+        <td sec:authorize="hasRole('ADMIN')"><a th:href="@{tasks/edit/{id} (id=${task.id})}" th:text="#{edit}"></a></td>
+        <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/tasks/{id}/sub/create(id=${task.id})}" th:text="#{createSub}"></a></td>
+        <td><a th:href="@{/tasks/{id} (id=${task.id})}" th:text="#{details}"></a></td>
         <!--<td><a th:href="${'/tasks/edit/'+task.id}">Edit</a></td>-->
     </tr>
     </tbody>

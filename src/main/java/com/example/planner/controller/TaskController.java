@@ -1,13 +1,9 @@
 package com.example.planner.controller;
 
-import com.example.planner.db.UserRepository;
 import com.example.planner.dto.CreateUserDTO;
 import com.example.planner.dto.SubTaskDTO;
 import com.example.planner.dto.TaskDTO;
-import com.example.planner.model.Task;
-import com.example.planner.model.User;
 import com.example.planner.service.TaskService;
-import com.example.planner.service.UserService;
 import com.example.planner.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,54 +32,69 @@ public class TaskController {
     @RequestMapping("/tasks/{id}")
     @GetMapping
     public String showTask(@PathVariable("id") int id, Model model) {
-        // model oproepen om wat aan toe te voegen
-        model.addAttribute("task", service.getTask(id));
+        try {
+            model.addAttribute("task", this.service.getTask(id));
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+        }
         return "task.html";
     }
 
-    @RequestMapping("/tasks/new")
-    @GetMapping
-    public String addTask() {
+    @GetMapping("/tasks/new")
+    public String addTask(Model model) {
+        // geef een lege taak mee
+        model.addAttribute("task",new TaskDTO());
         return "newForm.html";
     }
 
-    @RequestMapping("/tasks/new/submit")
-    @PostMapping
-    public String addTaskSubmit(@ModelAttribute TaskDTO task, Model model, BindingResult bindingResult) {
+    @PostMapping("/tasks/new")
+    public String addTaskSubmit(@ModelAttribute @Valid TaskDTO task , Model model, BindingResult bindingResult) {
         // bindingResult checkt of er iets fout is
         if (bindingResult.hasErrors()) {
-            return "form";
+            return "newForm";
         }
         service.addTask(task);
         return "redirect:/tasks";
     }
 
-    @RequestMapping("/tasks/edit/{id}")
+    @GetMapping("/tasks/edit/{id}")
     public String editTask(@PathVariable("id") int id, Model model) {
+        try {
+            model.addAttribute("task", this.service.getTask(id));
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+        }
         // taak meegeven aan de model
-        model.addAttribute("task", service.getTask(id));
         return "editTask.html";
     }
 
-    @RequestMapping("/tasks/edit/submitChange")
-    @PostMapping
-    public String editTaskSubmit(@ModelAttribute TaskDTO task, Model model) {
+    @PostMapping("/tasks/edit/{id}")
+    public String editTaskSubmit(@ModelAttribute("task") @Valid TaskDTO task, Model model, @PathVariable("id") int id, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "editTask";
+        }
         service.editTask(task.getId(), task);
-        return "redirect:/tasks";
+        return "redirect:/task/"+task.getId();
     }
 
-    @RequestMapping("/tasks/subtask/submit")
-    @PostMapping
-    public String createSubTaskSubmit(@ModelAttribute SubTaskDTO subTask, Model model) {
+    @PostMapping("/tasks/{id}/sub/create")
+    // @Valid en BindingResult nodig om te checken
+    public String createSubTaskSubmit(@ModelAttribute("subTask") @Valid SubTaskDTO subTask, Model model, BindingResult bindingResult, @PathVariable String id) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("id",id); // anders spelen we deze kwijt
+            return "newSubTask";
+        }
         int idSuperTask = subTask.getId();
         service.addSubTask(subTask);
         model.addAttribute("task", service.getTask(idSuperTask));
         return "redirect:/tasks/" + idSuperTask;
     }
 
-    @RequestMapping("/tasks/{id}/sub/create")
+    @GetMapping("/tasks/{id}/sub/create")
     public String createSubTask(@PathVariable String id, Model model) {
         model.addAttribute("id", id);
+        // geef een lege taak mee
+        model.addAttribute("subTask",new SubTaskDTO());
         return "newSubTask.html";
     }
 
@@ -92,25 +103,24 @@ public class TaskController {
         return "navigation.html";
     }
 
-    @GetMapping
     // Deze moet /login zijn; net zoals de post
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String fetchLogin() {
+        // geen user klaarzetten omdat deze geen nieuwe persoon in db pusht
         return "login.html";
     }
 
-    @RequestMapping("/registerPage")
+    @GetMapping("/signup")
     public String getRegisterPage(Model model){
         // deze lege user klaarzetten om door te geven aan de form
         model.addAttribute("user",new CreateUserDTO());
         return "register.html";
     }
 
-    @PostMapping
-    @RequestMapping("/signup")
+    @PostMapping("/signup")
     public String postCreateUser(@ModelAttribute("user") @Valid CreateUserDTO user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/registerPage";
+            return "register";
         }
         userService.createUser(user);
         return "redirect:/login";

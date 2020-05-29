@@ -3,26 +3,31 @@
 <div th:include="header.html"></div>
 <body style="height: 100%; width: 100%">
 <div th:include="nav.html"></div>
-<form th:method="post" th:action="@{/tasks/new/submit}">
-    <p>
+<form th:method="post" th:action="@{/tasks/new}" th:object="${task}">
+    <p th:text="${#fields.globalErrors()}"></p>
+    <div>
         <label for="title" th:text="#{title} + ':'"></label>
-        <input type="text" id="title" name="title">
-    </p>
-    <p>
+        <input type="text" th:field="*{title}">
+        <p th:errors="*{title}"></p>
+    </div>
+    <div>
         <label for="description" th:text="#{desc} + ':'"></label>
-        <input type="text" id="description" name="description">
-    </p>
-    <p>
+        <input type="text" th:field="*{description}">
+        <!--<p th:errors="*{description}"></p>-->
+    </div>
+    <div>
         <label for="deadlineDate" th:text="#{duedate} + ':'"></label>
-        <input type="date" id="deadlineDate" name="deadlineDate">
-    </p>
-    <p>
+        <input type="date" th:field="*{deadlineDate}">
+        <!--<p th:errors="*{deadlineDate}"></p>-->
+    </div>
+    <div>
         <label for="deadlineTime" th:text="#{duetime} + ':'"></label>
-        <input type="time" id="deadlineTime" name="deadlineTime">
-    </p>
-    <p>
+        <input type="time" th:field="*{deadlineTime}">
+        <!--<p th:errors="*{deadlineTime}"></p>-->
+    </div>
+    <div>
         <input type="submit" th:value="#{submit}">
-    </p>
+    </div>
 </form>
 <div th:include="footer.html"></div>
 </body>

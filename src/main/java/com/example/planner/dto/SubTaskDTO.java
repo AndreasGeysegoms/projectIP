@@ -3,12 +3,20 @@ package com.example.planner.dto;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 public class SubTaskDTO {
     private TaskDTO superTask;
+    @NotEmpty
+    @Size(min=1)
     private String title;
+    @NotNull
     private int id;
+    @NotEmpty
+    @Size(min=1)
     private String description;
 
     public SubTaskDTO() {

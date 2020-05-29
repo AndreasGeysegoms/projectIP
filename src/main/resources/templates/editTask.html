@@ -3,7 +3,8 @@
 <div th:include="header.html"></div>
 <body style="height: 100%; width: 100%">
 <div th:include="nav.html"></div>
-<form method="post" action="/tasks/edit/submitChange">
+<form th:method="post" th:action="@{'/tasks/edit/' +${task.id}}" th:object="${task}">
+    <p th:text="${#fields.globalErrors()}"></p>
     <p>
         <label for="title" th:text="#{title} + ':'"></label>
         <input type="text" id="title" name="title" th:value="${task.title}">

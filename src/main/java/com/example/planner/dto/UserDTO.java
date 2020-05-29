@@ -3,9 +3,15 @@ package com.example.planner.dto;
 
 import com.example.planner.model.UserRole;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class UserDTO {
+    @NotNull
     private Long id;
+    @NotEmpty
     private String username;
+    @NotNull
     private UserRole role;
 
     public Long getId() {

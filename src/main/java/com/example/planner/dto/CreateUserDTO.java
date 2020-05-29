@@ -2,6 +2,7 @@ package com.example.planner.dto;
 
 import javax.validation.constraints.NotEmpty;
 
+// de user zonder role; security measure
 public class CreateUserDTO {
     @NotEmpty
     private String username;

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="currentPage = #{detail}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="currentPage = #{detail}" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:include="header.html"></div>
 <body style="height: 100%; width: 100%">
 <div th:include="nav.html"></div>
-<p th:unless="${task}" th:text="#{notFound}"></p>
+<p th:unless="${task}" th:text="#{notFound}"></p><!--Zo werkt dit niet-->
 <table th:if="${task}">
     <tr>
         <td th:text="${task.title}"></td>
         <td th:text="${task.description}"></td>
         <td th:text="${task.deadlineDate}"></td>
-        <td><a th:href="@{/tasks/edit/{id} (id=${task.id})}" th:text="#{edit}"></a></td>
-        <td><a th:href="@{/tasks/{id}/sub/create(id=${task.id})}" th:text="#{createSub}"></a></td>
+        <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/tasks/edit/{id} (id=${task.id})}" th:text="#{edit}"></a></td>
+        <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/tasks/{id}/sub/create(id=${task.id})}" th:text="#{createSub}"></a></td>
     </tr>
 </table>
 <div class="grid-container">

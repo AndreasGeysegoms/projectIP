@@ -3,18 +3,21 @@
 <div th:include="header.html"></div>
 <body style="height: 100%; width: 100%">
 <div th:include="nav.html"></div>
-<form th:method="post" th:action="@{/tasks/subtask/submit}">
-    <p>
+<form th:method="post" th:action="@{'/tasks/' + ${id} + '/sub/create'}" th:object="${subTask}">
+    <p th:text="${#fields.globalErrors()}"></p>
+    <div>
         <label for="title" th:text="#{title} + ':'"></label>
-        <input type="text" id="title" name="title">
-    </p>
-    <p>
+        <input type="text" th:field="*{title}">
+        <p th:errors="*{title}"></p>
+    </div>
+    <div>
         <label for="description" th:text="#{desc} + ':' "></label>
-        <input type="text" id="description" name="description">
-    </p>
-    <p>
+        <input type="text" th:field="*{description}">
+        <p th:errors="*{description}"></p>
+    </div>
+    <div>
         <input type="hidden" th:value="${id}" id="id" name="id">
-    </p>
+    </div>
     <p>
         <input type="submit" th:value="#{submit}">
     </p>
