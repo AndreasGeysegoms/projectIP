@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <title th:text="${currentPage} + ' - ' +#{taskmgr}"></title>
@@ -10,17 +8,4 @@
     <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-
 </head>
-<body>
-<nav>
-    <ul>
-        <li><a href="/tasks" th:text="#{overview}"></a></li>
-        <li><a href="/tasks/new" th:text="#{newTask}"></a></li>
-    </ul>
-</nav>
-<h1 th:text="${currentPage}">
-
-</h1>
-</body>
-</html>

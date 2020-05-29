@@ -15,5 +15,5 @@ public interface Service {
 
     void editTask(int id, TaskDTO task);
 
-    //void addSubTask(SubTaskDTO subTask);
+    void addSubTask(SubTaskDTO subTask);
 }

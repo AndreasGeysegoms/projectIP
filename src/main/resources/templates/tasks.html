@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/" th:with="currentPage='Task Overview'">
-
-<body style="height: 100%; width: 100%">
 <div th:include="header.html"></div>
-<p th:if="${tasks == null || tasks.empty}">No tasks left to do</p>
+<body style="height: 100%; width: 100%">
+<div th:include="nav.html"></div>
+<p th:if="${tasks == null || tasks.empty}" th:text="#{noTasks}"></p>
 <table th:if="${tasks != null && !tasks.empty}">
     <thead>
     <tr>
-        <th>Task</th>
+        <th th:text="#{task}"></th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="task: ${tasks}">
         <td th:text="${task.formatted}"></td>
-        <td><a th:href="@{tasks/edit/{id} (id=${task.id})}">Edit</a></td>
-        <td><a th:href="@{/tasks/{id}/sub/create(id=${task.id})}">Create subtask</a></td>
+        <td><a th:href="@{tasks/edit/{id} (id=${task.id})}" th:text="#{edit}"></a></td>
+        <td><a th:href="@{/tasks/{id}/sub/create(id=${task.id})}" th:text="#{createSub}"></a></td>
         <!--<td><a th:href="${'/tasks/edit/'+task.id}">Edit</a></td>-->
     </tr>
     </tbody>

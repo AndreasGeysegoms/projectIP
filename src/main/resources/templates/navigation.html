@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:with="currentPage='Home'">
-<body style="height: 100%; width: 100%">
 <div th:include="header.html"></div>
+<body style="height: 100%; width: 100%">
+<div th:include="nav.html"></div>
 <span th:text="#{lang.change}"></span>:
 <select id="locales">
     <option value=""></option>
@@ -17,7 +18,7 @@
         $("#locales").change(function () {
             var selectedOption = $('#locales').val();
             if (selectedOption != ''){
-                window.location.replace('/?lang=' + selectedOption);
+                window.location.replace(window.location.pathname + '?lang=' + selectedOption);
             }
         });
     });

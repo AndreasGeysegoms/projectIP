@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="currentPage = 'New Task'">
-<body style="height: 100%; width: 100%">
 <div th:include="header.html"></div>
-<form method="post" action="/tasks/new/submit">
+<body style="height: 100%; width: 100%">
+<div th:include="nav.html"></div>
+<form th:method="post" th:action="@{/tasks/new/submit}">
     <p>
-        <label for="title">Title:</label>
+        <label for="title" th:text="#{title} + ':'"></label>
         <input type="text" id="title" name="title">
     </p>
     <p>
-        <label for="description">Description:</label>
+        <label for="description" th:text="#{desc} + ':'"></label>
         <input type="text" id="description" name="description">
     </p>
     <p>
-        <label for="deadlineDate">Due date:</label>
+        <label for="deadlineDate" th:text="#{duedate} + ':'"></label>
         <input type="date" id="deadlineDate" name="deadlineDate">
     </p>
     <p>
-        <label for="deadlineTime">Due time:</label>
+        <label for="deadlineTime" th:text="#{duetime} + ':'"></label>
         <input type="time" id="deadlineTime" name="deadlineTime">
     </p>
     <p>
-        <input type="submit" value="Submit">
+        <input type="submit" th:value="#{submit}">
     </p>
 </form>
 <div th:include="footer.html"></div>

@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="currentPage='Edit Task'">
-<body style="height: 100%; width: 100%">
 <div th:include="header.html"></div>
+<body style="height: 100%; width: 100%">
+<div th:include="nav.html"></div>
 <form method="post" action="/tasks/edit/submitChange">
     <p>
-        <label for="title">Title:</label>
+        <label for="title" th:text="#{title} + ':'"></label>
         <input type="text" id="title" name="title" th:value="${task.title}">
     </p>
     <p>
-        <label for="description">Description:</label>
+        <label for="description" th:text="#{desc} + ':'"></label>
         <input type="text" id="description" name="description" th:value="${task.description}">
     </p>
     <p>
-        <label for="deadlineDate">Due date:</label>
+        <label for="deadlineDate" th:text="#{duedate} + ':'"></label>
         <input type="date" id="deadlineDate" name="deadlineDate" th:value="${task.deadlineDate}">
     </p>
     <p>
-        <label for="deadlineTime">Due time:</label>
+        <label for="deadlineTime" th:text="#{duetime} + ':'"></label>
         <input type="time" id="deadlineTime" name="deadlineTime" th:value="${task.deadlineTime}">
     </p>
     <p>
         <input type="hidden" name="id" id="id" th:value="${task.id}">
     </p>
     <p>
-        <input type="submit" value="Submit my changes!">
+        <input type="submit" th:value="#{submitChanges}">
     </p>
 </form>
 <div th:include="footer.html"></div>

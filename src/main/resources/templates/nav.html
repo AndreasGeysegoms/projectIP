@@ -1,0 +1,17 @@
+<nav>
+    <ul>
+        <li><a href="/tasks" th:text="#{overview}"></a></li>
+        <li><a href="/tasks/new" th:text="#{newTask}"></a></li>
+        <li th:if="${#httpServletRequest.remoteUser != null}">
+            <form th:action="@{/logout}" method="post">
+                <p>
+                    <label for="">Welcome [[${#httpServletRequest.remoteUser}]]!</label>
+                    <input type="submit" value="Sign Out"/>
+                </p>
+            </form>
+        </li>
+    </ul>
+</nav>
+<h1 th:text="${currentPage}">
+
+</h1>
