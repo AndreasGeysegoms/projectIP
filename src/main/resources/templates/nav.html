@@ -1,7 +1,7 @@
 <nav>
     <ul>
-        <li><a href="/tasks" th:text="#{overview}"></a></li>
-        <li sec:authorize="hasRole('ADMIN')"><a href="/tasks/new" th:text="#{newTask}"></a></li>
+        <li sec:authorize="isAuthenticated()"><a href="/tasks" th:text="#{overview}"></a></li>
+        <li sec:authorize="hasAuthority('ADMIN')"><a href="/tasks/new" th:text="#{newTask}"></a></li>
         <li style="    padding: 50.5px;
     background: slategrey;
     color: white;

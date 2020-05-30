@@ -6,12 +6,12 @@
 <form th:method="post" th:action="@{/signup}" th:object="${user}">
     <!--gebruik th:object als object en wijs th:field toe als attributes-->
     <div>
+        <p th:errors="*{username}"></p>
         <label for="username" th:text="#{userName} + ':'"></label>
         <!--th:field geeft aan welke parameter aan dit inputveld gelinkt is;
          zorgt voor bij een fout geeft deze de juiste velden opnieuw ingevuld terug;
          id en name attribute worden automatisch ingevuld-->
         <input type="text" th:field="*{username}">
-        <p th:errors="*{username}"></p>
     </div>
     <div>
         <label for="password" th:text="#{userPass} + ':'"></label>

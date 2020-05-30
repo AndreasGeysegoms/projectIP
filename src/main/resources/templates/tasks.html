@@ -13,8 +13,8 @@
     <tbody>
     <tr th:each="task: ${tasks}">
         <td th:text="${task.formatted}"></td>
-        <td sec:authorize="hasRole('ADMIN')"><a th:href="@{tasks/edit/{id} (id=${task.id})}" th:text="#{edit}"></a></td>
-        <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/tasks/{id}/sub/create(id=${task.id})}" th:text="#{createSub}"></a></td>
+        <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{tasks/edit/{id} (id=${task.id})}" th:text="#{edit}"></a></td>
+        <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/tasks/{id}/sub/create(id=${task.id})}" th:text="#{createSub}"></a></td>
         <td><a th:href="@{/tasks/{id} (id=${task.id})}" th:text="#{details}"></a></td>
         <!--<td><a th:href="${'/tasks/edit/'+task.id}">Edit</a></td>-->
     </tr>

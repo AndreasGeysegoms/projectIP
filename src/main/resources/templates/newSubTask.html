@@ -4,16 +4,15 @@
 <body style="height: 100%; width: 100%">
 <div th:include="nav.html"></div>
 <form th:method="post" th:action="@{'/tasks/' + ${id} + '/sub/create'}" th:object="${subTask}">
-    <p th:text="${#fields.globalErrors()}"></p>
     <div>
+        <p th:errors="*{title}"></p>
         <label for="title" th:text="#{title} + ':'"></label>
         <input type="text" th:field="*{title}">
-        <p th:errors="*{title}"></p>
     </div>
     <div>
+        <p th:errors="*{description}"></p>
         <label for="description" th:text="#{desc} + ':' "></label>
         <input type="text" th:field="*{description}">
-        <p th:errors="*{description}"></p>
     </div>
     <div>
         <input type="hidden" th:value="${id}" id="id" name="id">

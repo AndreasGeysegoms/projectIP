@@ -2,6 +2,7 @@ package com.example.planner.service;
 
 import com.example.planner.dto.SubTaskDTO;
 import com.example.planner.dto.TaskDTO;
+import com.example.planner.model.SubTask;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,12 +26,15 @@ public class TaskServiceTest {
         List<TaskDTO> tasks = service.getTasks();
         int len = tasks.size();
 
+        SubTaskDTO subTask = new SubTaskDTO();
+
         TaskDTO taskDTO = new TaskDTO();
         taskDTO.setTitle("Titel");
         taskDTO.setDescription("Beschrijving");
         taskDTO.setDeadlineDate(LocalDate.of(2021,5,20));
         taskDTO.setDeadlineTime(LocalTime.of(5,19));
         taskDTO.setId(0);
+        taskDTO.addSubTask(subTask);
         service.addTask(taskDTO);
 
         tasks = service.getTasks();
@@ -40,6 +44,7 @@ public class TaskServiceTest {
         assertEquals(len+1, tasks.size());
         TaskDTO task = tasks.get(len);
         assertNotNull(task);
+        assertEquals(subTask,task.getSubTasks().get(0));
     }
 
     @Test

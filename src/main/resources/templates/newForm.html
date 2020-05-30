@@ -5,24 +5,24 @@
 <div th:include="nav.html"></div>
 <form th:method="post" th:action="@{/tasks/new}" th:object="${task}">
     <div>
+        <p th:errors="*{title}"></p>
         <label for="title" th:text="#{title} + ':'"></label>
         <input type="text" th:field="*{title}">
-        <p th:errors="*{title}"></p>
     </div>
     <div>
+        <p th:errors="*{description}"></p>
         <label for="description" th:text="#{desc} + ':'"></label>
         <input type="text" th:field="*{description}">
-        <p th:errors="*{description}"></p>
     </div>
     <div>
+        <p th:errors="*{deadlineDate}"></p>
         <label for="deadlineDate" th:text="#{duedate} + ':'"></label>
         <input type="date" th:field="*{deadlineDate}">
-        <p th:errors="*{deadlineDate}"></p>
     </div>
     <div>
+        <p th:errors="*{deadlineTime}"></p>
         <label for="deadlineTime" th:text="#{duetime} + ':'"></label>
         <input type="time" th:field="*{deadlineTime}">
-        <p th:errors="*{deadlineTime}"></p>
     </div>
     <div>
         <input type="submit" th:value="#{submit}">
