@@ -41,7 +41,7 @@ public class TaskController {
     @GetMapping("/new")
     public String addTask(Model model) {
         // geef een lege taak mee
-        model.addAttribute("task",new TaskDTO());
+        model.addAttribute("task", new TaskDTO());
         return "newForm.html";
     }
 
@@ -58,25 +58,21 @@ public class TaskController {
 
     @GetMapping("/edit/{id}")
     public String editTask(@PathVariable("id") int id, Model model) {
-        try {
-            // taak meegeven aan de model
-            model.addAttribute("task", this.service.getTask(id));
-            //check for valid task
-            this.service.getTask(id);
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-        }
+
+        // taak meegeven aan de model
+        model.addAttribute("task", this.service.getTask(id));
+        this.service.getTask(id);
 
         return "editTask.html";
     }
 
     @PostMapping("/edit/{id}")
-    public String editTaskSubmit(@ModelAttribute("task") @Valid TaskDTO task, @PathVariable("id") int id, BindingResult bindingResult) {
+    public String editTaskSubmit(@ModelAttribute("task") @Valid TaskDTO task, BindingResult bindingResult, @PathVariable("id") int id) {
         if (bindingResult.hasErrors()) {
             return "editTask";
         }
         service.editTask(task.getId(), task);
-        return "redirect:/tasks/"+id;
+        return "redirect:/tasks/" + id;
     }
 
     @PostMapping("/{id}/sub/create")
@@ -85,16 +81,15 @@ public class TaskController {
         if (bindingResult.hasErrors()) {
             return "newSubTask";
         }
-        int idSuperTask = subTask.getId();
         service.addSubTask(subTask);
-        return "redirect:/tasks/" + idSuperTask;
+        return "redirect:/tasks/" + id;
     }
 
     @GetMapping("/{id}/sub/create")
     public String createSubTask(@PathVariable String id, Model model) {
         model.addAttribute("id", id);
         // geef een lege taak mee
-        model.addAttribute("subTask",new SubTaskDTO());
+        model.addAttribute("subTask", new SubTaskDTO());
         return "newSubTask.html";
     }
 }

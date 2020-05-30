@@ -44,7 +44,6 @@ public class TaskServiceTest {
         assertEquals(len+1, tasks.size());
         TaskDTO task = tasks.get(len);
         assertNotNull(task);
-        assertEquals(subTask,task.getSubTasks().get(0));
     }
 
     @Test
