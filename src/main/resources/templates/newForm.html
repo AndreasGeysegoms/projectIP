@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="currentPage = #{newTask}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="currentPage = #{newTask}" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:include="header.html"></div>
 <body style="height: 100%; width: 100%">
 <div th:include="nav.html"></div>
 <form th:method="post" th:action="@{/tasks/new}" th:object="${task}">
-    <p th:text="${#fields.globalErrors()}"></p>
     <div>
         <label for="title" th:text="#{title} + ':'"></label>
         <input type="text" th:field="*{title}">
@@ -13,17 +12,17 @@
     <div>
         <label for="description" th:text="#{desc} + ':'"></label>
         <input type="text" th:field="*{description}">
-        <!--<p th:errors="*{description}"></p>-->
+        <p th:errors="*{description}"></p>
     </div>
     <div>
         <label for="deadlineDate" th:text="#{duedate} + ':'"></label>
         <input type="date" th:field="*{deadlineDate}">
-        <!--<p th:errors="*{deadlineDate}"></p>-->
+        <p th:errors="*{deadlineDate}"></p>
     </div>
     <div>
         <label for="deadlineTime" th:text="#{duetime} + ':'"></label>
         <input type="time" th:field="*{deadlineTime}">
-        <!--<p th:errors="*{deadlineTime}"></p>-->
+        <p th:errors="*{deadlineTime}"></p>
     </div>
     <div>
         <input type="submit" th:value="#{submit}">

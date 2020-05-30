@@ -1,5 +1,6 @@
 package com.example.planner.dto;
 
+import org.apache.tomcat.jni.Local;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -45,6 +46,26 @@ public class TaskDTOTest {
         taskDTO.addSubTask(subTaskDTO);
 
         assertEquals(1,taskDTO.getSubTasks().size());
-        //assertEquals("Eerste Taak", subTaskDTO.getSuperTask().getTitle());
     }
+
+    @Test
+    public void testConstructor3Param() {
+        TaskDTO taskDTO = new TaskDTO("Eerste taak","Taak #1", LocalDate.of(2000,1,15));
+
+        assertEquals("Taak #1",taskDTO.getTitle());
+        assertEquals("Eerste taak",taskDTO.getDescription());
+        assertEquals(LocalDate.of(2000,1,15),taskDTO.getDeadlineDate());
+    }
+
+    @Test
+    public void testConstructor5Param() {
+        TaskDTO taskDTO = new TaskDTO("Eerste taak", LocalDate.of(2000,1,15),LocalTime.of(23,59),5,"Taak #1");
+
+        assertEquals("Taak #1",taskDTO.getTitle());
+        assertEquals("Eerste taak",taskDTO.getDescription());
+        assertEquals(LocalDate.of(2000,1,15),taskDTO.getDeadlineDate());
+        assertEquals(LocalTime.of(23,59),taskDTO.getDeadlineTime());
+        assertEquals(5,taskDTO.getId());
+    }
+
 }

@@ -11,12 +11,10 @@ import java.io.Serializable;
 public class SubTaskDTO {
     private TaskDTO superTask;
     @NotEmpty
-    @Size(min=1)
     private String title;
     @NotNull
     private int id;
     @NotEmpty
-    @Size(min=1)
     private String description;
 
     public SubTaskDTO() {
